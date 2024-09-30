@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Component
 @NoArgsConstructor
 public class SampleMapper {
-
     public SampleDto toDto(Sample entity) {
         SampleDto.SampleDtoBuilder dtoBuilder = SampleDto.builder();
 

@@ -1,11 +1,8 @@
 package com.app.hotel.auth.controller;
 
-import com.app.hotel.auth.model.dto.AuthUsuarioDto;
-import com.app.hotel.auth.service.AuthService;
+import com.app.hotel.auth.model.dto.AuthDto;
 import com.app.hotel.auth.service.AuthServiceImpl;
 import com.app.hotel.common.responses.ResponseFactory;
-import com.app.hotel.samples.model.dto.SampleDto;
-import com.app.hotel.samples.service.SampleServiceImpl;
 import com.app.hotel.usuarios.model.dto.UsuarioDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,11 +21,19 @@ public class AuthController {
 
     private final AuthServiceImpl authService;
 
-    @PostMapping
-    public ResponseEntity<?> registrarCuenta(@RequestBody AuthUsuarioDto authUsuarioDto) {
-        AuthUsuarioDto result = authService.registrarCuenta(authUsuarioDto);
+    @PostMapping("/signup")
+    public ResponseEntity<?> registrarCuenta(@RequestBody AuthDto authDto) {
+        UsuarioDto result = authService.registrarCuenta(authDto);
 
-        ResponseFactory<SampleDto> response = ResponseFactory.success("Registrado correctamente", result);
+        ResponseFactory<UsuarioDto> response = ResponseFactory.success("registrado correctamente", result);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<?> iniciarSesion(@RequestBody AuthDto authDto) {
+        UsuarioDto result = authService.iniciarSesion(authDto);
+
+        ResponseFactory<UsuarioDto> response = ResponseFactory.success("success", result);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

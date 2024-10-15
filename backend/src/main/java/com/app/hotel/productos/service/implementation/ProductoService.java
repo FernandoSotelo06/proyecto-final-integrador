@@ -1,35 +1,22 @@
 package com.app.hotel.productos.service.implementation;
 
-import com.app.hotel.productos.model.entity.Producto;
-import com.app.hotel.productos.repository.ProductosRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.app.hotel.productos.model.dto.ProductoDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-@Service
-public class ProductoService {
+public interface ProductoService {
 
-    @Autowired
-    private ProductosRepository productosRepository;
+    List<ProductoDto> listarTodos();  // Listar todos los productos
 
-    // Obtener todos los productos
-    public List<Producto> listarTodos() {
-        return productosRepository.findAll();
-    }
+    Page<ProductoDto> paginar(Pageable pageable);  // Listar productos paginados
 
-    // Guardar un nuevo producto
-    public Producto guardarProducto(Producto producto) {
-        return productosRepository.save(producto);
-    }
+    ProductoDto obtenerPorId(Integer id);  // Obtener un producto por su ID
 
-    // Obtener un producto por ID
-    public Producto obtenerPorId(int id) {
-        return productosRepository.findById(id).orElse(null);
-    }
+    ProductoDto guardarProducto(ProductoDto productoDto);  // Guardar un nuevo producto o actualizar uno existente
 
-    // Eliminar un producto por ID
-    public void eliminarProducto(int id) {
-        productosRepository.deleteById(id);
-    }
+    ProductoDto actualizarProducto(Integer id, ProductoDto productoDto);  // Actualizar un producto existente
+
+    void eliminarProducto(Integer id);  // Eliminar un producto por su ID
 }

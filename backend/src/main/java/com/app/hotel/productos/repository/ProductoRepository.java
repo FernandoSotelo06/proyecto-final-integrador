@@ -2,7 +2,9 @@ package com.app.hotel.productos.repository;
 
 import com.app.hotel.productos.model.entity.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProductosRepository extends JpaRepository <Producto, Integer>  {
+@Repository
+public interface ProductoRepository extends JpaRepository <Producto, Integer>  {
 
 }
